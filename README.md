@@ -99,7 +99,7 @@ without dependency constraints.
 
 ## Repository Structure
 ```
-A_oss_public/
+tensor-logic-runtime/
 ├── docs/
 │   ├── tld_runtime_architecture_v0.7_EN.md # Runtime core (0–15)
 │   ├── Profile_Architecture_v2_v0.7.md # Identity / Profile spec
