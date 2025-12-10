@@ -1,0 +1,29 @@
+[
+  {
+    "Assign": {
+      "target": {
+        "TensorRef": {
+          "name": "A",
+          "indices": []
+        }
+      },
+      "value": {
+        "Sum": {
+          "left": {
+            "TensorRef": {
+              "name": "B",
+              "indices": []
+            }
+          },
+          "right": {
+            "TensorRef": {
+              "name": "C",
+              "indices": []
+            }
+          },
+          "op": "+"
+        }
+      }
+    }
+  }
+]

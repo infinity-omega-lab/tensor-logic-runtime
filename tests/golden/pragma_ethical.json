@@ -1,0 +1,11 @@
+[
+  {
+    "Pragma": {
+      "kind": "ethical",
+      "spec": {
+        "use": "research",
+        "ai_alignment": "Lacia"
+      }
+    }
+  }
+]

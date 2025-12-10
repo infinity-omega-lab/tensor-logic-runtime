@@ -1,0 +1,28 @@
+[
+  {
+    "AggregatorCall": {
+      "name": "sum",
+      "indices": ["i"],
+      "args": [
+        {
+          "Product": {
+            "terms": [
+              {
+                "TensorRef": {
+                  "name": "A",
+                  "indices": ["i"]
+                }
+              },
+              {
+                "TensorRef": {
+                  "name": "B",
+                  "indices": ["i"]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]
