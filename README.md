@@ -85,27 +85,38 @@ and **context continuity** across long sequences.
 The Persona Layer operates outside the runtime core and, together with Profile Architecture v2, defines the stable identity boundary for cross-version cognitive continuity.
 
 ### 3. Runtime Scaffold (C++17)
-A minimal implementation containing:
-- lexer  
-- parser  
-- AST builder  
-- IR conversion stubs  
-- smoke test validating grammar → AST flow
 
-The scaffold is intentionally lightweight so that researchers can extend it
-without dependency constraints.
+This repository provides a **minimal but functional C++17 runtime scaffold** for Tensor Logic, including:
+
+- Lexer (tokenization)
+- Recursive-descent parser
+- Direct AST construction
+- AST → IR lowering (minimal implementation)
+- Smoke tests validating the grammar → AST → IR pipeline
+
+The implementation is intentionally lightweight and dependency-free, serving as a **clear baseline** for researchers and implementers who wish to extend or replace individual layers.
 
 ---
 
 ## Repository Structure
+
 ```
-tensor-logic-runtime/
-├── docs/
-│   ├── tld_runtime_architecture_v0.7_EN.md # Runtime core (0–15)
-│   ├── Profile_Architecture_v2_v0.7.md # Identity / Profile spec
-│   ├── CVCL_v2_v0.7.md # Cross-version layer
-│   └── PersonaLayer_12_4_PUBLIC_v0_7.md # Persona (Public Edition)
-└── README.md
+tl_runtime_v0_7_cpp/
+├── CMakeLists.txt
+├── README.md
+├── include/
+│   └── tl/
+│       ├── ast/        # AST node definitions
+│       ├── ir/         # IR structures and builder
+│       ├── parser/     # Lexer, parser, tokens
+│       └── runtime/    # Execution/runtime stubs
+├── src/
+│   ├── main.cpp        # Demo / smoke execution
+│   ├── ir/
+│   ├── parser/
+│   └── runtime/
+└── tests/
+    └── parser_runtime_smoke.cpp
 ```
 
 ---
@@ -113,21 +124,28 @@ tensor-logic-runtime/
 ## Build Instructions
 
 ### Requirements
-- CMake 3.15+
-- A C++17 compiler (MSVC, Clang, or GCC)
+- CMake 3.15 or newer
+- A C++17 compatible compiler  
+  (tested with MSVC; Clang and GCC should also work)
 
-### Build
-```
+### Build (out-of-source)
+
+From the `tl_runtime_v0_7_cpp` directory:
+
+```sh
 mkdir build
 cd build
 cmake ..
 cmake --build .
-
 ```
 
-### Run Demo
+### Run demo
 
-./tl_demo
+```sh
+./tl_runtime_v0_7_demo
+```
+
+This will execute a no-op demo pipeline that validates parsing and IR construction.
 
 ### Run Tests
 
