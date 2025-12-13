@@ -2,16 +2,33 @@
 
 #include <stdexcept>
 
+
 namespace tl::ir {
 
 Program Builder::build(const ast::Program& program) {
     Program ir_prog;
     for (const auto& stmt_ptr : program.statements) {
         if (auto assign = dynamic_cast<ast::AssignStmt*>(stmt_ptr.get())) {
-            auto inst = std::make_unique<AssignInst>();
-            inst->lhs = build_tensor_ref(assign->lhs);
-            inst->rhs = build_expr(*assign->rhs);
-            ir_prog.instructions.push_back(std::move(inst));
+            switch (assign->kind) {
+                case ast::AssignKind::Assign: {
+                    auto inst = std::make_unique<AssignInst>();
+                    inst->lhs = build_tensor_ref(assign->lhs);
+                    inst->rhs = build_expr(*assign->rhs);
+                    ir_prog.instructions.push_back(std::move(inst));
+                    break;
+                }
+                case ast::AssignKind::PlusAssign: {
+                    // Preserve "+=" intent as an accumulate-add stub in IR.
+                    auto inst = std::make_unique<AccumulateInst>();
+                    inst->lhs = build_tensor_ref(assign->lhs);
+                    inst->op = AccumulateOp::Add;
+                    inst->rhs = build_expr(*assign->rhs);
+                    ir_prog.instructions.push_back(std::move(inst));
+                    break;
+                }
+                default:
+                    throw std::runtime_error("Unsupported assignment kind in IR build");
+            }
         } else if (auto acc = dynamic_cast<ast::AccumulateStmt*>(stmt_ptr.get())) {
             auto inst = std::make_unique<AccumulateInst>();
             inst->lhs = build_tensor_ref(acc->lhs);
@@ -25,6 +42,8 @@ Program Builder::build(const ast::Program& program) {
                 case ast::AccumulateKind::Avg:
                     inst->op = AccumulateOp::Avg;
                     break;
+                default:
+                    throw std::runtime_error("Unsupported accumulate kind in IR build");
             }
             inst->rhs = build_expr(*acc->rhs);
             ir_prog.instructions.push_back(std::move(inst));
@@ -71,6 +90,11 @@ ExprPtr Builder::build_expr(const ast::Expression& expr) {
         node->value = num->value;
         return node;
     }
+    if (auto id = dynamic_cast<const ast::Identifier*>(&expr)) {
+        auto node = std::make_shared<TensorExpr>();
+        node->ref.name = id->name;
+        return node;
+    }
     if (auto tref = dynamic_cast<const ast::TensorRef*>(&expr)) {
         auto node = std::make_shared<TensorExpr>();
         node->ref = build_tensor_ref(*tref);
@@ -78,7 +102,16 @@ ExprPtr Builder::build_expr(const ast::Expression& expr) {
     }
     if (auto bin = dynamic_cast<const ast::BinaryExpr*>(&expr)) {
         auto node = std::make_shared<BinaryExpr>();
-        node->op = (bin->op == ast::BinaryOpKind::Add) ? BinaryOp::Add : BinaryOp::Multiply;
+        switch (bin->op) {
+            case ast::BinaryOpKind::Add:
+                node->op = BinaryOp::Add;
+                break;
+            case ast::BinaryOpKind::Multiply:
+                node->op = BinaryOp::Multiply;
+                break;
+            default:
+                throw std::runtime_error("Unsupported binary op in IR build");
+        }
         node->left = build_expr(*bin->left);
         node->right = build_expr(*bin->right);
         return node;
@@ -104,7 +137,7 @@ ExprPtr Builder::build_expr(const ast::Expression& expr) {
         }
         return node;
     }
-    throw std::runtime_error("Unhandled AST expression during IR build");
+    throw std::runtime_error("Unhandled AST statement during IR build");
 }
 
 TensorRef Builder::build_tensor_ref(const ast::TensorRef& ref) {
