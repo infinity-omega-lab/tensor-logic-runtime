@@ -146,6 +146,7 @@ cmake --build .
 ```
 
 This will execute a no-op demo pipeline that validates parsing and IR construction.
+- v0.7.1: IR builder structural sanity check completed.
 
 ### Run Tests
 
