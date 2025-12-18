@@ -42,6 +42,11 @@ This public preview introduces:
 v0.7 is the first version that forms a **closed deterministic runtime model**
 with consistent semantics, prediction, identity, and distributed behavior.
 
+### TL Runtime v0.7.2
+- Reference ReduceExecutor finalized
+- avg= is explicitly unsupported in the v0.7.x reference runtime to avoid undefined semantics
+- Deterministic reduce execution verified by minimal correctness test
+
 ---
 
 ## What This Project Is Not
