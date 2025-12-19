@@ -47,6 +47,21 @@ with consistent semantics, prediction, identity, and distributed behavior.
 - avg= is explicitly unsupported in the v0.7.x reference runtime to avoid undefined semantics
 - Deterministic reduce execution verified by minimal correctness test
 
+### Reference Runtime Phase 1 (v0.7.2)
+
+Version v0.7.2 finalizes the **Phase 1 reference execution path** for reduce semantics.
+
+- Deterministic single-threaded ReduceExecutor
+- Explicit domain binding via DomainBinder
+- Unsupported operations (e.g. AvgSet) fail explicitly
+- No implicit allocation, inference, or optimization
+
+Reference documents:
+- `TL_Runtime_Phase1_Minimal_Execution_Flow_v0.7.2.md`
+- `TL_Runtime_DomainBinder_Phase1_v0.7.2.md`
+
+This phase serves as the frozen correctness baseline for all future runtime phases.
+
 ---
 
 ## What This Project Is Not
