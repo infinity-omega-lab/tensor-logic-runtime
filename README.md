@@ -50,7 +50,7 @@ with consistent semantics, prediction, identity, and distributed behavior.
 ### Reference Runtime Phase 1 (v0.7.2)
 
 Version v0.7.2 finalizes the **Phase 1 reference execution path** for reduce semantics.
-
+- Deterministic reduce execution verified by `tl_runtime_v0_7_reduce_test.exe`
 - Deterministic single-threaded ReduceExecutor
 - Explicit domain binding via DomainBinder
 - Unsupported operations (e.g. AvgSet) fail explicitly
