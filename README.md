@@ -62,6 +62,8 @@ Reference documents:
 
 This phase serves as the frozen correctness baseline for all future runtime phases.
 
+> Status: **v1.0-draft — execution verified via third-party build (Codex)**
+
 For a concrete, end-to-end explanation of how reduce-based execution
 reaches semantic finality in the v0.7.2 reference runtime, see:
 
