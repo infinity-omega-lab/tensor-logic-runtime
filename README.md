@@ -62,6 +62,17 @@ Reference documents:
 
 This phase serves as the frozen correctness baseline for all future runtime phases.
 
+### Execution Scope Toward v1.0
+
+While the original Tensor Logic formulation presents a wide range of expressive
+tensor equations, the v1.0 runtime intentionally supports **only a restricted,
+deterministic subset**.
+
+For a clear overview of which Tensor Logic expressions are executable in v1.0,
+and which are explicitly out of scope by design, see:
+
+- `docs/Tensor_Expression_Roadmap_v1_Executable_View.md`
+
 ### Design Guardrails and Post-Phase Roadmap (v0.7.2)
 
 The following documents define **explicit design boundaries** around Phase 2
