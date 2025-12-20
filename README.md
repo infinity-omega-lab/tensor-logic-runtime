@@ -62,6 +62,25 @@ Reference documents:
 
 This phase serves as the frozen correctness baseline for all future runtime phases.
 
+### Design Guardrails and Post-Phase Roadmap (v0.7.2)
+
+The following documents define **explicit design boundaries** around Phase 2
+and clarify what comes *after* it — without initiating any implementation.
+
+These documents exist to preserve the correctness and determinism
+of the v0.7.2 reference runtime.
+
+- `Phase2_Design_Guardrail_v0.7.2.md`  
+  Defines what **must not be done** in Phase 2.  
+  This document acts as a hard design brake to prevent accidental semantic or runtime changes.
+
+- `Post_Phase2_Work_Overview.md`  
+  Describes **conceptual future phases** after Phase 2.  
+  All phases listed there are inactive and explicitly out of scope for v0.7.x.
+
+These documents are **non-executable**, design-only, and normative
+for preserving the frozen semantics of the v0.7.x runtime.
+
 ---
 
 ## What This Project Is Not
