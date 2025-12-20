@@ -62,6 +62,11 @@ Reference documents:
 
 This phase serves as the frozen correctness baseline for all future runtime phases.
 
+For a concrete, end-to-end explanation of how reduce-based execution
+reaches semantic finality in the v0.7.2 reference runtime, see:
+
+- `docs/Example_Minimal_Reduce_Execution.md`
+
 ### Execution Scope Toward v1.0
 
 While the original Tensor Logic formulation presents a wide range of expressive
