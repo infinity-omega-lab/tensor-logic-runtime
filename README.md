@@ -210,17 +210,8 @@ This will execute a no-op demo pipeline that validates parsing and IR constructi
 ctest
 
 ### Roadmap
-#### v0.8 — Implementation Phase
-    expanded runtime functions
-    TL tensor converter (Python → TL)
-    initial cognitive shell draft
-    hands-on documentation
 
-#### v1.0 — Full Cognitive Release
-    stable APIs
-    extended reasoning modules
-    integration guides
-    formal runtime specification
+    docs/Tensor_Expression_Roadmap_v1_Executable_View.md
 
 ### Contribution
 For questions, suggestions, or issues,
